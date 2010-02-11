@@ -232,7 +232,7 @@ def generate(buddies_file, logs_dir, min_time):
 
     print
     print "=== Top Lines You Said ==="
-    for row in sort_results(top_words)[:30]:
+    for row in sort_results(top_outgoing)[:30]:
         print "%5s %s"  % (row[1], row[0].encode('utf-8'))
 
     print
