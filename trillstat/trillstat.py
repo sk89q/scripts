@@ -160,7 +160,7 @@ def generate(buddies_file, logs_dir, min_time):
                 if min_time != None and time < min_time: continue
                 nodes.append((time, node))
         
-        nodes.sort(lambda a, b: a[0] - a[0])
+        nodes.sort(lambda a, b: a[0] - b[0])
         nodes = [n[1] for n in nodes]
         
         for node in nodes:
