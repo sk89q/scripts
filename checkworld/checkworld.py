@@ -433,7 +433,7 @@ deep check, down to acceptable item and block IDs. Only chunk files are checked.
     for path in files:
         progress = i / float(total)
         rel_path = os.path.relpath(path, world)
-        print("[{0}/{1} {2}% {3}] {4}".format(i + 1, total, corrupt, int(progress * 100), rel_path))
+        print("[{0}/{1} {2}% {3}] {4}".format(i + 1, total, int(progress * 100), corrupt, rel_path))
         try:
             ChunkValidator(path).validate()
         except Exception, e:
