@@ -274,7 +274,7 @@ class ChunkValidator(object):
         self.expect_child_value(tag, 'y', IntTag, self.expect_y_inside_chunk)
         self.expect_child_value(tag, 'z', IntTag, self.expect_z_inside_chunk)
         id = tag['id'].data
-        if id == 'Furnance':
+        if id == 'Furnace':
             self.expect_child_value(tag, "BurnTime", ShortTag)
         elif id == 'Sign':
             self.expect_child_value(tag, "Text1", StringTag, self.expect_valid_sign_text)
@@ -287,7 +287,7 @@ class ChunkValidator(object):
         elif id == 'Chest':
             self.expect_child_value(tag, "Items", ListTag, self.expected_valid_chest_items)
         else:
-            raise ValidationError("Unknown title entity type '{0}' in '{1}'"
+            raise ValidationError("Unknown tile entity type '{0}' in '{1}'"
                     .format(id, get_path(tag)))
     
     def validate_blocks(self, tag):
