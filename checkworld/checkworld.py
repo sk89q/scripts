@@ -182,17 +182,18 @@ class ChunkValidator(object):
             or name == 'Pig'\
             or name == 'Sheep'\
             or name == 'Cow'\
-            or name == 'Chicken'
+            or name == 'Chicken'\
+            or name == 'Squid'
     
     def expect(self, tag, cond, msg):
         if not cond:
             raise ValidationError("Expected '{0}' ".format(get_path(tag)) + msg)
     
     def expect_valid_chest_item_id(self, tag, id):
-        if id < 0 or (id >= 21 and id <= 34)\
+        if id < 0 or (id >= 26 and id <= 34)\
                 or id == 36\
-                or (id >= 92 and id <= 255)\
-                or (id >= 351 and id <= 2255)\
+                or (id >= 93 and id <= 255)\
+                or (id >= 355 and id <= 2255)\
                 or id >= 2258:
             raise ValidationError("Invalid item/block chest ID: '{0}' ".format(id))
     
@@ -286,6 +287,10 @@ class ChunkValidator(object):
             self.expect_child_value(tag, "Delay", ShortTag, self.expect_valid_mob_spawner_delay)
         elif id == 'Chest':
             self.expect_child_value(tag, "Items", ListTag, self.expected_valid_chest_items)
+        elif id == 'Trap':
+             self.expect_child_value(tag, "Items", ListTag, self.expected_valid_chest_items)
+        elif id == 'Music':
+             self.expect_child_value(tag, "note", ByteTag)
         else:
             raise ValidationError("Unknown tile entity type '{0}' in '{1}'"
                     .format(id, get_path(tag)))
@@ -295,8 +300,8 @@ class ChunkValidator(object):
         self.expect(tag, len(tag.data) == 32768, "to be 32768 bytes long")
         for i in xrange(0, len(tag.data)):
             block_id = self.byte_fmt.unpack(tag.data[i])[0]
-            if block_id < 0 or (block_id >= 21 and block_id <= 34)\
-                    or block_id == 36 or block_id >= 92:
+            if block_id < 0 or (block_id >= 26 and block_id <= 34)\
+                    or block_id == 36 or block_id >= 93:
                 raise ValidationError("Invalid block ID: {0}".format(block_id))
     
     def validate_data(self, tag):
